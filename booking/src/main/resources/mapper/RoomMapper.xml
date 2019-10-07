@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.booking.dao.BookingMapper">
+    <resultMap id="getRoom" type="com.example.booking.entity.Room">
+        <id property="roomid" column="roomid" />
+        <result property="rsort" column="rsort" />
+        <result property="state" column="state" />
+        <result property="image" column="image" />
+        <result property="price" column="price" />
+        <result property="preview" column="preview" />
+    </resultMap>
+    <select id="getRoom" resultMap="getRoom">
+        SELECT *
+        FROM room
+    </select>
+    <select id="findRoomByRoomid" resultType="com.example.booking.entity.Room">
+        SELECT *
+        FROM room
+        WHERE roomid=#{roomid}
+    </select>
+    <delete id="deleteRoomByroomid">
+    delete from room
+    where roomid=#{roomid}
+  </delete>
+    <insert id="insertRoom">
+    insert into room (roomid,rsort,state,image,price,preview)
+    values (#{roomid},#{rsort},#{state},#{image},#{price},#{preview})
+  </insert>
+    <update id="updateByRoomid">
+    update room
+    set rsort=#{rsort},
+        state=#{state},
+        image=#{image},
+        price=#{price},
+        preview=#{preview}
+    where roomid=#{roomid}
+  </update>
+</mapper>

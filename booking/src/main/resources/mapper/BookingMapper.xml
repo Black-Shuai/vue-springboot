@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.booking.dao.BookingMapper">
+    <resultMap id="AllMess" type="com.example.booking.entity.Booking">
+        <id property="userid" column="userid"/>
+        <result property="roomid" column="roomid"/>
+        <result property="btime" column="btime"/>
+        <result property="stime" column="stime"/>
+        <result property="rsort" column="rsort"/>
+        <result property="state" column="state"/>
+        <result property="image" column="image"/>
+        <result property="price" column="price"/>
+        <result property="preview" column="preview"/>
+        <result property="username" column="username"/>
+        <result property="sex" column="sex"/>
+        <result property="telephone" column="telephone"/>
+        <result property="role" column="role"/>
+        <result property="cardid" column="cardid"/>
+    </resultMap>
+    <select id="findAllByUserid" resultMap="AllMess">
+        SELECT booking.userid,booking.roomid,btime,stime,rsort,state,image,price,preview,username,sex,telephone,role,cardid
+        FROM booking,user,room
+        WHERE user.userid=booking.userid and booking.roomid=room.roomid and booking.userid=#{userid}
+    </select>
+    <select id="findAllByRoomid" resultMap="AllMess">
+        SELECT booking.userid,booking.roomid,btime,stime,rsort,state,image,price,preview,username,sex,telephone,role,cardid
+        FROM booking,user,room
+        WHERE user.userid=booking.userid and booking.roomid=room.roomid and booking.roomid=#{roomid}
+    </select>
+    <delete id="deleteBookingByroomid">
+    delete from booking
+    where roomid=#{roomid}
+  </delete>
+    <insert id="insertBooking">
+    insert into booking (userid,roomid,btime,stime)
+    values (#{userid},#{roomid},#{btime},#{stime})
+  </insert>
+    <update id="updateBookingByRoomid">
+    update booking
+    set btime=#{btime},
+        stime=#{stime}
+    where roomid=#{roomid}
+  </update>
+</mapper>

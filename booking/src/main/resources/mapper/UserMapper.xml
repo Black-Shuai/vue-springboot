@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.booking.dao.UserMapper">
+    <select id="findByUsername" resultType="com.example.booking.entity.User">
+      SELECT * FROM user
+      where
+      username=#{username}
+    </select>
+    <delete id="deleteUserByUserid">
+    delete from user
+    where userid=#{userid}
+  </delete>
+    <insert id="insertUser">
+    insert into user (userid,username,password,sex,telephone,role,cardid)
+    values (#{userid},#{username},#{password},#{sex},#{telephone},#{role},#{cardid})
+  </insert>
+    <update id="updateByUserid">
+    update user
+    set user_name=#{userName},
+        password=#{password},
+        sex=#{sex},
+        telephone=#{telephone},
+        role=#{role},
+        cardid=#{cardid}
+    where userid=#{userid}
+  </update>
+</mapper>
